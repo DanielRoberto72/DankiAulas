@@ -209,4 +209,30 @@ letter-spacing:3.2px ;
     text-align: center;
     font-size: 14px;
 }
-@
+footer{
+    
+    background-color: #0000ff;
+    text-align: center;
+    color: #FFF;
+    padding: 8px 0;
+}
+section.noticia{
+    padding: 20px 0;
+    background-color: #EAEAEA;
+}
+
+.noticia-single{
+    padding: 20px;
+    background-color:#FFF ;
+    border-radius: 10px;
+    width: 58%;
+    margin-right: 2%;
+}
+
+.noticia-single h2{
+    font-size: 48px;
+}
+.logo a{
+    text-decoration: none;
+    color: #FFF;
+}
