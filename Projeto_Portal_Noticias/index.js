@@ -2,7 +2,14 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
-const { runInNewContext } = require('vm')
+
+const moongose = require('mongoose')
+
+moongose.connect('mongodb+srv://danielRobertoDB:<password>@cluster0.rry3x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true}).then(function() {
+    console.log('conectado com sucesso');
+}).catch(function(err) {
+    console.log(err.message);
+})
 
 app.engine('html', require('ejs').renderFile)
 app.set('view engine','html')
