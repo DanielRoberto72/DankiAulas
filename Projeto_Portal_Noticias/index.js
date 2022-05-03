@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const moongose = require('mongoose')
 const Posts = require('./Posts.js')
+
 moongose.connect('mongodb+srv://DB:password@cluster0.rry3x.mongodb.net/nodeJs?retryWrites=true&w=majority',{useNewUrlParser: true}).then(function() {
     console.log('conectado com sucesso');
 }).catch(function(err) {
