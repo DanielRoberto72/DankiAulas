@@ -2,10 +2,9 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
-
 const moongose = require('mongoose')
-
-moongose.connect('mongodb+srv://danielRobertoDB:<password>@cluster0.rry3x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser: true}).then(function() {
+const Posts = require('./Posts.js')
+moongose.connect('mongodb+srv://danielRobertoDB:JVFHQss9BN3Sr8r5@cluster0.rry3x.mongodb.net/nodeJs?retryWrites=true&w=majority',{useNewUrlParser: true}).then(function() {
     console.log('conectado com sucesso');
 }).catch(function(err) {
     console.log(err.message);
@@ -24,7 +23,19 @@ app.get('/',(req,res)=>{
     console.log(req.query)
 
     if(req.query.busca == null){
-        res.render('home',{})
+        Posts.find({}).sort({'_id': -1}).exec(function(err,posts){
+            posts - posts.map(function(val){
+                return{
+                    titulo: val.titulo,
+                    imagem: val.imagem,
+                    categoria: val.categoria,
+                    conteudo: val.conteudo,
+                    slug: val.slug
+                    
+                }
+            })
+            res.render('home',{posts:posts})
+        })
     }else{
         res.render('busca',{})
     }
@@ -32,7 +43,10 @@ app.get('/',(req,res)=>{
 
 app.get('/:slug',(req,res)=>{
     // res.send(req.params.slug)
-    res.render('single',{})
+    Posts.findOneAndUpdate({slug: req.params.slug},{$inc : {views: 1}}, {new: true}, function(err,resposta){
+        //console.log(resposta)
+        res.render('single',{noticia:resposta})
+    }) 
 })
 
 app.listen(5000,()=>{

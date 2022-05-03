@@ -5,8 +5,8 @@
             <div class="img-destaque">
                 <div class="overlay-destaque"></div>
                 <div class="titulo-destaque-descricao">
-                    <h2>Quer fugir das praia de verão?</h2>
-                    <p>Testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
+                    <h2><%=  posts[0].titulo %></h2>
+                    <p><%-  posts[0].conteudo %></p>
                 </div>
                 <img src="/public/images/landscape.jpg" alt="">
             </div>
@@ -18,60 +18,30 @@
             <br><br>
             <div class="center">
                 <div class="ultimas">
+                    <% for (let i = 1; i<posts.length; i++){ %>
                     <div class="box-ultimas-single">
                         <img src="/public/images/santos.jpg" alt="">
                         <div class="conteudo-noticia-single">
-                        <h3>Futebol</h3>
-                        <h2>Santos jogando</h2>
-                        <p>Santos jogando imagem de fundo aeeeee</p>
-                        <a href="/saiba-mais">Saiba Mais</a>
+                        <h3><%=  posts[i].categoria %></h3>
+                        <h2><%=  posts[i].titulo %></h2>
+                        <p><%-  posts[i].conteudo %></p>
+                        <a href="<%=  posts[0].slug %>">Saiba Mais</a>
                         </div>  
                     </div>
-                    <div class="box-ultimas-single">
-                        <img src="/public/images/santos.jpg" alt="">
-                        <div class="conteudo-noticia-single">
-                        <h3>Futebol</h3>
-                        <h2>Santos jogando</h2>
-                        <p>Santos jogando imagem de fundo aeeeee</p>
-                        <a href="/saiba-mais">Saiba Mais</a>
-                        </div> 
-                    </div>
+                    <% } %>
                 </div>
                 <div class="mais-lidas">
                     <h3>Mais lidas</h3>
+                    <% for (let i = 0; i<posts.length; i++){ %>
                     <div class="mais-lidas-noticia-single">
                         <img src="/public/images/santos.jpg" alt="">
                         <div class="texto-mais-lidas-single">
-                            <h4>Futebol</h4>
-                            <p>Santos não ganha fora de casa</p>
-                            <a href="/saiba-mais">Saiba Mais</a>
+                            <h4><%=  posts[i].categoria %></h4>
+                            <p><%=  posts[i].titulo %></p>
+                            <a href="<%=  posts[i].slug %>">Saiba Mais</a>
                         </div>
                     </div>
-                    <div class="mais-lidas-noticia-single">
-                        <img src="/public/images/santos.jpg" alt="">
-                        <div class="texto-mais-lidas-single">
-                            <h4>Futebol</h4>
-                            <p>Santos não ganha fora de casa</p>
-                            <a href="/saiba-mais">Saiba Mais</a>
-                        </div>
-                    </div>
-                    <div class="mais-lidas-noticia-single">
-                        <img src="/public/images/santos.jpg" alt="">
-                        <div class="texto-mais-lidas-single">
-                            <h4>Futebol</h4>
-                            <p>Santos não ganha fora de casa</p>
-                            <a href="/saiba-mais">Saiba Mais</a>
-                        </div>
-                    </div>
-                    <div class="mais-lidas-noticia-single">
-                        <img src="/public/images/santos.jpg" alt="">
-                        <div class="texto-mais-lidas-single">
-                            <h4>Futebol</h4>
-                            <p>Santos não ganha fora de casa</p>
-                            <a href="/saiba-mais">Saiba Mais</a>
-                        </div>
-                    </div>
-
+                    <% } %>
                 </div>
             
         </div>
