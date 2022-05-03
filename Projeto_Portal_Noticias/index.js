@@ -4,7 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const moongose = require('mongoose')
 const Posts = require('./Posts.js')
-moongose.connect('mongodb+srv://danielRobertoDB:JVFHQss9BN3Sr8r5@cluster0.rry3x.mongodb.net/nodeJs?retryWrites=true&w=majority',{useNewUrlParser: true}).then(function() {
+moongose.connect('mongodb+srv://DB:password@cluster0.rry3x.mongodb.net/nodeJs?retryWrites=true&w=majority',{useNewUrlParser: true}).then(function() {
     console.log('conectado com sucesso');
 }).catch(function(err) {
     console.log(err.message);
@@ -34,18 +34,54 @@ app.get('/',(req,res)=>{
                     
                 }
             })
-            res.render('home',{posts:posts})
+            Posts.find({}).sort({'views': -1}).limit(3).exec(function(err,postsTop){
+                postsTop = postsTop.map(function(val){
+
+                    return {
+                        titulo: val.titulo,
+                        conteudo: val.conteudo,
+                        descricaoCurta: val.conteudo.substr(0,100),
+                        imagem: val.imagem,
+                        slug: val.slug,
+                        categoria: val.categoria,
+                        views: val.views
+                    }
+            })
+            res.render('home',{posts:posts,postsTop:postsTop});
+            })
         })
     }else{
-        res.render('busca',{})
+        Posts.find({titulo: {$regex: req.query.busca, $options: "i"}}, function(err, posts){
+            // console.log(posts)
+            res.render('busca',{posts:posts,contagem:posts.length})
+        })
+        
     }
 })
 
 app.get('/:slug',(req,res)=>{
     // res.send(req.params.slug)
     Posts.findOneAndUpdate({slug: req.params.slug},{$inc : {views: 1}}, {new: true}, function(err,resposta){
-        //console.log(resposta)
-        res.render('single',{noticia:resposta})
+        if(resposta!= null){
+            Posts.find({}).sort({'views': -1}).limit(3).exec(function(err,postsTop){
+                postsTop = postsTop.map(function(val){
+
+                    return {
+                        titulo: val.titulo,
+                        conteudo: val.conteudo,
+                        descricaoCurta: val.conteudo.substr(0,100),
+                        imagem: val.imagem,
+                        slug: val.slug,
+                        categoria: val.categoria,
+                        views: val.views
+                    }
+            })
+            res.render('single',{noticia:resposta,postsTop:postsTop});
+            })  
+        }else{
+            res.redirect('/')
+        }
+        
     }) 
 })
 

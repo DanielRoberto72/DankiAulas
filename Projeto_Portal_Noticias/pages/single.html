@@ -12,40 +12,17 @@
         </div>
         <div class="mais-lidas">
             <h3>Mais lidas</h3>
-            
-            <div class="mais-lidas-noticia-single">
-                <img src="/public/images/santos.jpg" alt="">
-                <div class="texto-mais-lidas-single">
-                    <h4>Futebol</h4>
-                    <p>Santos não ganha fora de casa</p>
-                    <a href="/saiba-mais">Saiba Mais</a>
+            <% for (let i = 0; i<postsTop.length; i++){ %>
+                <div class="mais-lidas-noticia-single">
+                    <img src="/public/images/santos.jpg" alt="">
+                    <div class="texto-mais-lidas-single">
+                        <h4><%=  postsTop[i].categoria %></h4>
+                        <h6> Views: <%=  postsTop[i].views %></h6>
+                        <p><%=  postsTop[i].titulo %></p>
+                        <a href="<%=  postsTop[i].slug %>">Saiba Mais</a>
+                    </div>
                 </div>
-            </div>
-            <div class="mais-lidas-noticia-single">
-                <img src="/public/images/santos.jpg" alt="">
-                <div class="texto-mais-lidas-single">
-                    <h4>Futebol</h4>
-                    <p>Santos não ganha fora de casa</p>
-                    <a href="/saiba-mais">Saiba Mais</a>
-                </div>
-            </div>
-            <div class="mais-lidas-noticia-single">
-                <img src="/public/images/santos.jpg" alt="">
-                <div class="texto-mais-lidas-single">
-                    <h4>Futebol</h4>
-                    <p>Santos não ganha fora de casa</p>
-                    <a href="/saiba-mais">Saiba Mais</a>
-                </div>
-            </div>
-            <div class="mais-lidas-noticia-single">
-                <img src="/public/images/santos.jpg" alt="">
-                <div class="texto-mais-lidas-single">
-                    <h4>Futebol</h4>
-                    <p>Santos não ganha fora de casa</p>
-                    <a href="/saiba-mais">Saiba Mais</a>
-                </div>
-            </div>
-
+            <% } %>
         </div>
     </div>
 </section>
